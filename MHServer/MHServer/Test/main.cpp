@@ -1,5 +1,7 @@
 #include <LibMH.h>
 #include <NetWork/NetworkWorker.h>
+#include <boost/log/common.hpp>
+#include "ConfigTest.h"
 
 US_NS_MH
 US_NS_STD
@@ -7,6 +9,9 @@ US_NS_BOOST
 
 int main(int argc, char** argv)
 {
+	MHConfigTest();
+
+	/*
 	boost::thread threadNetwork(boost::bind(&NetworkWorker::run, NetworkWorker::getInstance()));
 	boost::shared_ptr<boost::thread_group> threadGroup(new boost::thread_group());
 	SgInsSessionServMgr->startSessionServices(threadGroup);
@@ -19,8 +24,8 @@ int main(int argc, char** argv)
 	threadNetwork.join();
 	threadGroup->join_all();
 	//assert(pStr == NULL);
-
+	*/
+	
 	::system("pause");
-	return 0;
 	return 0;
 }

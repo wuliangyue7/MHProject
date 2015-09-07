@@ -60,6 +60,12 @@
     <ClInclude Include="NetWork\NetMessageFactory.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Log\MHLog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\MHConfigManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NetWork\NetworkWorker.cpp">
@@ -87,6 +93,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="NetWork\NetMessageFactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Config\MHConfigManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
