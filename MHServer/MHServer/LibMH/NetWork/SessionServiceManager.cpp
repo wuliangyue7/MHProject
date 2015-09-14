@@ -9,14 +9,29 @@ SessionServiceManager* SessionServiceManager::getInstance()
 	return p_instance;
 }
 
-SessionServiceManager::SessionServiceManager()
+SessionServiceManager::SessionServiceManager(BSPtr<BPTree> config)
 :_sessionServList()
 {
-	int i;
-	for (i = 0; i < MAX_SESSION_SERV; i++)
+	if (config == NULL)
 	{
-		_sessionServList.push_back(shared_ptr<SessionService>(new SessionService("SessionService", MAX_SESSION_SERV_CAPACITY)));
+		MH_FATAL("SessionServiceManager cnst with null config");
+		return;
 	}
+
+	int threadCount = config->get<MHUInt32>("threadCount");
+	int sessionCapacity = config->get<MHUInt32>("sessionCapacity");
+	int i;
+	for (i = 0; i < threadCount; i++)
+	{
+		_sessionServList.push_back(BSPtr<SessionService>(new SessionService(config)));
+	}
+
+	std::stringstream strStream;
+	std::string strLogTmp;
+	strStream << "SessionServiceManager init service thread count: " << threadCount << "session capacity: " << sessionCapacity;
+	strStream >> strLogTmp;
+	
+	MH_INFO(strLogTmp);
 }
 
 SessionServiceManager::~SessionServiceManager()
@@ -52,13 +67,13 @@ shared_ptr<SessionService> SessionServiceManager::getSessionService()
 	std::vector<shared_ptr<SessionService>>::iterator it;
 	for (it = _sessionServList.begin(); it != _sessionServList.end(); it++)
 	{
-		servStat = (*it)->getServStat();
+		servStat = (*it)->getServiceStat();
 		if ((servStat == SessionService::Full) || (servStat == SessionService::NotWork))
 		{
 			continue;
 		}
 
-		if ((serv == NULL) || (servStat < (*it)->getServStat()))
+		if ((serv == NULL) || (servStat < (*it)->getServiceStat()))
 		{
 			serv = *it;
 		}

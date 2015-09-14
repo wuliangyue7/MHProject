@@ -2,11 +2,18 @@
 
 NS_BEGIN_MH
 
-SessionService::SessionService(std::string name, MHInt32 sessionCapacity)
-:Service(name, 30),
-_sessionCapacity(sessionCapacity),
+SessionService::SessionService(BSPtr<BPTree> config)
+:Service(config),
+_sessionCapacity(0),
 _sessionList()
 {
+	if (config == NULL)
+	{
+		MH_FATAL("SessionService can't create with null config");
+		return;
+	}
+
+	_sessionCapacity = config->get<MHInt16>("sessionCapacity");
 }
 
 SessionService::~SessionService()
@@ -25,7 +32,7 @@ inline MHInt32 SessionService::getAliveSessionCount()
 	return _sessionList.size();
 }
 
-SessionService::ServiceStat SessionService::getServStat()
+SessionService::ServiceStat SessionService::getServiceStat()
 {
 	if (getWorkerStat() != Worker::WorkerRunning)
 	{
@@ -49,7 +56,7 @@ SessionService::ServiceStat SessionService::getServStat()
 		return ServiceStat::Busy;
 	}
 
-	return ServiceStat::Working;
+	return ServiceStat::Normal;
 }
 
 bool SessionService::addSession(shared_ptr<Session> session)

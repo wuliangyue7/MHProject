@@ -49,7 +49,7 @@ protected:
 	virtual bool processNetMessage(shared_ptr<NetMessage> netMsg);
 
 private:
-	void begintReadData();
+	void beginReadData();
 	void handleRead(const boost::system::error_code& error, size_t bytes_transferred);
 	void sendData();
 	void trySendData();

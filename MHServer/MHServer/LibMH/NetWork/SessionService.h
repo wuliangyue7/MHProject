@@ -24,18 +24,18 @@ public:
 	{
 		NotWork = 0,
 		Idel,
-		Working,
+		Normal,
 		Busy,
 		Full,
 	};
 
-	SessionService(std::string name, MHInt32 sessionCapacity);
+	SessionService(BSPtr<BPTree> config);
 	~SessionService();
 
 	virtual void onTick();
 	inline MHInt32 getSessionCapacity();
 	inline MHInt32 getAliveSessionCount();
-	ServiceStat getServStat();
+	ServiceStat getServiceStat();
 	bool addSession(shared_ptr<Session> session);
 	bool removeSession(shared_ptr<Session> session);
 

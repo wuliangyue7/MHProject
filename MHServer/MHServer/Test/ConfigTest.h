@@ -31,7 +31,14 @@ bool MHConfigTest()
 	for (BPTree::iterator it = pt3.begin(); it != pt3.end(); ++it)
 	{
 		pt4 = it->second;
-		MH_TRACE2("id :", pt4.get<std::string>("id"));
+		try
+		{
+			MH_TRACE2("id :", pt4.get<std::string>("id1"));
+		}
+		catch (std::exception e)
+		{
+			MH_TRACE(e.what());
+		}
 	}
 
 	return true;

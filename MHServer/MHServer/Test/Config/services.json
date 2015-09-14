@@ -1,0 +1,3 @@
+{
+	"sessionServices":{"name":"sessionService", "tickTime":30, "port":7777, "threadCount":20 ,"sessionCapacity":10}
+}

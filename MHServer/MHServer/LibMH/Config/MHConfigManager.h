@@ -11,8 +11,6 @@
 #include <map>
 #include <boost/shared_ptr.hpp>
 
-#define BPTree boost::property_tree::ptree
-
 US_NS_BOOST
 
 NS_BEGIN_MH

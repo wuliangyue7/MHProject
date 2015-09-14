@@ -23,7 +23,7 @@ _sendedDataPos(0),
 _isSending(false)
 {
 	memset(_recvDataCache, 0x00, sizeof(_recvDataCache));
-	begintReadData();
+	beginReadData();
 }
 
 Session::~Session()
@@ -122,7 +122,7 @@ void Session::close()
 	}
 }
 
-void Session::begintReadData()
+void Session::beginReadData()
 {
 	_sock->async_read_some(buffer(_recvDataCache + _recvDataCachePos, RecvDataCacheMaxLen - _recvDataCachePos), boost::bind(&Session::handleRead, this,
 		boost::asio::placeholders::error,
@@ -173,7 +173,7 @@ void Session::handleRead(const boost::system::error_code& error, size_t bytes_tr
 		}
 	}
 
-	begintReadData();
+	beginReadData();
 }
 
 void Session::sendNetMessage(shared_ptr<NetMessage> message)

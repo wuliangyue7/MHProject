@@ -2,11 +2,24 @@
 
 NS_BEGIN_MH
 
-Service::Service(std::string name, boost::uint16_t tickTime)
-:_name(name),
-_tickTime(tickTime),
+Service::Service(BSPtr<BPTree> config)
+:_name(NULL),
+_tickTime(0),
 _tickCostTime(0)
 {
+	if (config == NULL)
+	{
+		MH_FATAL("can't start services with null config");
+		return;
+	}
+
+	_name = config->get<std::string>("name");
+	_tickTime = config->get<MHUInt32>("tickTime");
+}
+
+Service::Service()
+{
+
 }
 
 void Service::onStart()

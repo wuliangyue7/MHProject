@@ -6,16 +6,21 @@
 #include "../Common/MHComInc.h"
 #include "Message.h"
 #include "Worker.h"
+#include "../Log/MHLog.h"
+
+#include <boost/property_tree/ptree.hpp>
 
 NS_BEGIN_MH
 
 class Service:public Worker
 {
 public:
-	Service(std::string name, boost::uint16_t tickTime);
+	Service(BSPtr<BPTree> config);
 
 	virtual void onStart();
+	virtual void onPreRunning();
 	virtual void onRunning();
+	virtual void onPreFinish();
 	virtual void onFinish();
 
 	inline std::string getName() const
@@ -34,15 +39,22 @@ public:
 
 protected:
 	virtual void onTick() = 0;
-	
+
+private:
+	//no default cnst
+	Service();
+
+
 	std::queue<shared_ptr<Message>> _messageQueue;
 	boost::mutex _muMsg;
 
-private:
+protected:
 	std::string _name;
+
+private:
 	bool _running;
-	boost::uint16_t _tickTime;
-	boost::uint64_t _tickCostTime;
+	MHUInt32 _tickTime;
+	MHUInt64 _tickCostTime;
 };
 
 NS_END_MH

@@ -27,6 +27,10 @@
 #define MHInt32 boost::int32_t
 #define MHUInt32 boost::uint32_t
 
+#define BPTree boost::property_tree::ptree
+#define BSPtr boost::shared_ptr
+#define BSLock boost::mutex::scoped_lock
+
 #define SgScopedLock(__x) boost::mutex::scoped_lock lock((__x))
 
 #define MH_TRACE(__x) std::cout<<(__x)<<std::endl;
@@ -34,5 +38,11 @@
 #define MH_TRACE3(__x, __y, __z) std::cout<<(__x)<<(__y)<<__z<<std::endl;
 #define MH_TRACE5(__x, __y, __z, __w, __v) std::cout<<(__x)<<(__y)<<__z<<__w<<__v<<std::endl;
 #define SgInsSessionServMgr SessionServiceManager::getInstance()
+
+#define MH_DEBUG(msg) MH_TRACE(msg)
+#define MH_INFO(msg) MH_TRACE(msg)
+#define MH_WARING(msg) MH_TRACE(msg)
+#define MH_ERROR(msg) MH_TRACE(msg)
+#define MH_FATAL(msg) MH_TRACE(msg)
 
 #endif // __MHMACRO_h__

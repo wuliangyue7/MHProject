@@ -26,6 +26,7 @@ NS_BEGIN_MH
 class SessionServiceManager
 {
 public:
+	SessionServiceManager(BSPtr<BPTree> config);
 	~SessionServiceManager()
 		;
 	static SessionServiceManager* getInstance();
