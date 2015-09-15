@@ -2,12 +2,12 @@
 
 NS_BEGIN_MH
 
-SessionServiceManager* SessionServiceManager::p_instance = new SessionServiceManager();
+//SessionServiceManager* SessionServiceManager::p_instance = new SessionServiceManager();
 
-SessionServiceManager* SessionServiceManager::getInstance()
+/*essionServiceManager* SessionServiceManager::getInstance()
 {
 	return p_instance;
-}
+}*/
 
 SessionServiceManager::SessionServiceManager(BSPtr<BPTree> config)
 :_sessionServList()

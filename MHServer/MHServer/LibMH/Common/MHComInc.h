@@ -17,4 +17,6 @@
 #include <boost/function.hpp>
 #include <boost/any.hpp>
 
+#include "../Application/AppInfo.h"
+
 #endif // __MHCOMINC_H__

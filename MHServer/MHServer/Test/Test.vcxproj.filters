@@ -23,5 +23,8 @@
     <ClInclude Include="ConfigTest.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="NetWorkTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

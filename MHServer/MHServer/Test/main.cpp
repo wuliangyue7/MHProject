@@ -2,6 +2,7 @@
 #include <NetWork/NetworkWorker.h>
 #include <boost/log/common.hpp>
 #include "ConfigTest.h"
+#include "NetWorkTest.h"
 
 US_NS_MH
 US_NS_STD
@@ -9,8 +10,8 @@ US_NS_BOOST
 
 int main(int argc, char** argv)
 {
-	MHConfigTest();
-
+	//MHConfigTest();
+	MHTestNetWork();
 	/*
 	boost::thread threadNetwork(boost::bind(&NetworkWorker::run, NetworkWorker::getInstance()));
 	boost::shared_ptr<boost::thread_group> threadGroup(new boost::thread_group());

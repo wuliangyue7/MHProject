@@ -36,7 +36,7 @@ public:
 
 private:
 	SessionServiceManager();
-	static SessionServiceManager* p_instance;
+	//static SessionServiceManager* p_instance;
 
 	shared_ptr<SessionService> getSessionService();
 

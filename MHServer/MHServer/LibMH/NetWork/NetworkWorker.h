@@ -16,6 +16,7 @@ NS_BEGIN_MH
 class NetworkWorker:public Service
 {
 public:
+	NetworkWorker(shared_ptr<ASIO_SERV> ioservice, shared_ptr<BPTree> config);
 	virtual ~NetworkWorker();
 	static NetworkWorker* getInstance();
 
@@ -28,13 +29,13 @@ private:
 	void handleAccept(shared_ptr<boost::asio::ip::tcp::socket> socket, boost::system::error_code err);
 
 private:
-	NetworkWorker(shared_ptr<ASIO_SERV> ioservice, MHInt16 port);
-	static NetworkWorker* p_NetInstance;
+	NetworkWorker();
+	//static NetworkWorker* p_NetInstance;
 	void startAccept();
 
-	boost::uint16_t _port;
+	MHUInt16 _port;
 	shared_ptr<boost::asio::io_service> _ioservice;
-	boost::asio::ip::tcp::acceptor _accptor;
+	shared_ptr<boost::asio::ip::tcp::acceptor> _accptor;
 	//shared_ptr<boost::asio::ip::tcp::socket> _sock;
 };
 
