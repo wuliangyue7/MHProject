@@ -18,8 +18,8 @@
 #include <boost/asio.hpp>
 #include <google/protobuf/message.h>
 
-#define RecvDataCacheMaxLen 256*1024
-#define SendDataCacheMaxLen 256*1024
+#define RecvDataCacheMaxLen 4*1024*8
+#define SendDataCacheMaxLen 8*1024*8
 
 NS_BEGIN_MH
 US_NS_BOOST
@@ -38,10 +38,12 @@ public:
 class Session
 {
 public:
-	Session(shared_ptr<ASIO_TCP_SOCKET> sock);
+	Session(shared_ptr<BSocket> sock);
 	~Session();
 
 	void sendNetMessage(shared_ptr<NetMessage> message);
+	virtual void onInit();
+	std::string getSid();
 	void onTick();
 	void close();
 
@@ -57,7 +59,9 @@ private:
 	void processAllRecvNetMessage();
 	void onSockClose();
 
-	shared_ptr<ASIO_TCP_SOCKET> _sock;
+private:
+	std::string _sId;
+	shared_ptr<BSocket> _sock;
 	MHUInt8 _recvDataCache[RecvDataCacheMaxLen];
 	MHInt16 _recvDataCachePos;		//start 0 end _recvDataCachePos
 	std::queue<shared_ptr<NetMessage>> _recvMessageQueue;
@@ -70,6 +74,10 @@ private:
 	std::queue<shared_ptr<NetMessage>> _sendMessageQueue;
 	boost::mutex _muSendMsg;
 	bool _isSending;
+
+	static BMutex MU_SId;
+	static MHUInt32 SID;
+	static std::string createSid();
 };
 
 NS_END_MH

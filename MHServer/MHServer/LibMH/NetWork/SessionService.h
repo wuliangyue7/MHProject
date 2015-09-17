@@ -13,7 +13,7 @@
 #include "../Common/MHComInc.h"
 #include "../Thread//Service.h"
 #include "boost/asio.hpp"
-#include "Session.h"
+#include "./Session.h"
 
 NS_BEGIN_MH
 

@@ -12,8 +12,16 @@ NetMessage::NetMessage(MHUInt16 msgId, shared_ptr<google::protobuf::Message> msg
 message(msg)
 {}
 
-Session::Session(shared_ptr<ASIO_TCP_SOCKET> sock)
+MHUInt32 Session::SID = 0;
+std::string Session::createSid()
+{
+	BSLock lock(MU_SId);
+	return "sid"+(++SID);
+}
+
+Session::Session(shared_ptr<BSocket> sock)
 :_sock(sock),
+_sId(createSid()),
 _recvDataCachePos(0),
 _recvMessageQueue(),
 _sendDataCachePos(0),
@@ -32,6 +40,15 @@ Session::~Session()
 	{
 		_sock->close();
 	}
+}
+
+std::string Session::getSid()
+{
+	return _sId;
+}
+
+void Session::onInit()
+{
 }
 
 void Session::onTick()

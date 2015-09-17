@@ -5,9 +5,7 @@
 
 #include "../Common/MHComInc.h"
 #include "../NetWork/SessionServiceManager.h"
-
-#define SetAppInfo(__key, __value) AppInfo::getInstance->setAppInfo(__x, __y);
-#define GetAppInfo(__x) AppInfo::getInstance->getAppInfo(__x);
+#include "../Config/MHConfigManager.h"
 
 NS_BEGIN_MH
 
@@ -17,6 +15,10 @@ public:
 	static AppInfo* getInstance();
 	bool setAppInfo(const std::string& key, std::string value, bool forceUpdate);
 	std::string getAppInfo(const std::string& key);
+
+	void createConfigMgr();
+	BSPtr<MHConfigManager> getConfigMgr();
+
 	void AppInfo::createSessionServiceManager(BSPtr<BPTree> config);
 	BSPtr<SessionServiceManager> getSessionServiceMgr();
 
@@ -30,7 +32,8 @@ private:
 	std::map<std::string, std::string> _appStrInfo;
 
 	shared_ptr<SessionServiceManager> _sessionServiceMgr;
-	//std::map<std::string, int> _appInfo;
+	BSPtr<MHConfigManager> _confMgr;
+	std::map<std::string, int> _appInfo;
 };
 
 NS_END_MH

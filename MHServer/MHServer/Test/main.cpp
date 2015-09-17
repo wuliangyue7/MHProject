@@ -1,5 +1,5 @@
 #include <LibMH.h>
-#include <NetWork/NetworkWorker.h>
+#include <NetWork/NetworkService.h>
 #include <boost/log/common.hpp>
 #include "ConfigTest.h"
 #include "NetWorkTest.h"

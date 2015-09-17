@@ -16,7 +16,6 @@
 #include <boost/thread.hpp>
 #include <boost/function.hpp>
 #include <boost/any.hpp>
-
-#include "../Application/AppInfo.h"
+#include <boost/property_tree/ptree.hpp>
 
 #endif // __MHCOMINC_H__

@@ -10,8 +10,7 @@
 #ifndef SessionManager_h__
 #define SessionManager_h__
 
-#include "../Common/MHComInc.h"
-
+#include "../Common/MHMacro.h"
 #include "./SessionService.h"
 
 #include <boost/asio.hpp>
@@ -27,20 +26,19 @@ class SessionServiceManager
 {
 public:
 	SessionServiceManager(BSPtr<BPTree> config);
-	~SessionServiceManager()
-		;
-	static SessionServiceManager* getInstance();
-	void addSession(shared_ptr<ASIO_TCP_SOCKET> socket);
-	
-	void startSessionServices(shared_ptr<boost::thread_group> threadGroup);
+	~SessionServiceManager();
+
+	void onClinetConnect(BSPtr<BSocket> socket);
+	void startSessionServices(BSPtr<boost::thread_group> threadGroup);
+
+protected:
+	virtual BSPtr<SessionService> getSessionService();
 
 private:
 	SessionServiceManager();
-	//static SessionServiceManager* p_instance;
 
-	shared_ptr<SessionService> getSessionService();
-
-	std::vector<shared_ptr<SessionService>> _sessionServList;
+protected:
+	std::vector<BSPtr<SessionService>> _sessionServList;
 };
 
 NS_END_MH

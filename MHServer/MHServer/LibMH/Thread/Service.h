@@ -3,7 +3,7 @@
 #ifndef Service_h__
 #define Service_h__
 
-#include "../Common/MHComInc.h"
+#include "../Common/MHMacro.h"
 #include "Message.h"
 #include "Worker.h"
 #include "../Log/MHLog.h"

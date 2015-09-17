@@ -3,7 +3,7 @@
 #ifndef __MHCONFIG_H__
 #define __MHCONFIG_H__
 
-#include "../Common/MHMacro.h"
+#include "../Common/MHComInc.h"
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/filesystem.hpp>

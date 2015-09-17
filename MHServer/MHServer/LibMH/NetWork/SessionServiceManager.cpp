@@ -2,13 +2,6 @@
 
 NS_BEGIN_MH
 
-//SessionServiceManager* SessionServiceManager::p_instance = new SessionServiceManager();
-
-/*essionServiceManager* SessionServiceManager::getInstance()
-{
-	return p_instance;
-}*/
-
 SessionServiceManager::SessionServiceManager(BSPtr<BPTree> config)
 :_sessionServList()
 {
@@ -47,7 +40,7 @@ void SessionServiceManager::startSessionServices(shared_ptr<boost::thread_group>
 	}
 }
 
-void SessionServiceManager::addSession(shared_ptr<ASIO_TCP_SOCKET> sock)
+void SessionServiceManager::onClinetConnect(shared_ptr<BSocket> sock)
 {
 	shared_ptr<SessionService> serv = getSessionService();
 	if (serv == NULL)

@@ -8,8 +8,6 @@
 
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/descriptor.h>
-//#include "./message/SgMsgId.pb.h"
-//#include "./message/SgMsg.pb.h"
 #include "../network/Session.h"
 
 NS_BEGIN_MH

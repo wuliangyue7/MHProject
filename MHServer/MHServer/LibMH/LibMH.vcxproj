@@ -70,12 +70,13 @@
     <ClInclude Include="Application\AppInfo.h" />
     <ClInclude Include="Common\MHComInc.h" />
     <ClInclude Include="Config\MHConfigManager.h" />
+    <ClInclude Include="DB\MHDataBase.h" />
     <ClInclude Include="LibMH.h" />
     <ClInclude Include="Common\MHMacro.h" />
     <ClInclude Include="Log\MHLog.h" />
     <ClInclude Include="NetWork\NetMessageCodec.h" />
     <ClInclude Include="NetWork\NetMessageFactory.h" />
-    <ClInclude Include="NetWork\NetworkWorker.h" />
+    <ClInclude Include="NetWork\NetworkService.h" />
     <ClInclude Include="NetWork\Session.h" />
     <ClInclude Include="NetWork\SessionService.h" />
     <ClInclude Include="NetWork\SessionServiceManager.h" />
@@ -91,7 +92,7 @@
     <ClCompile Include="Config\MHConfigManager.cpp" />
     <ClCompile Include="NetWork\NetMessageCodec.cpp" />
     <ClCompile Include="NetWork\NetMessageFactory.cpp" />
-    <ClCompile Include="NetWork\NetworkWorker.cpp" />
+    <ClCompile Include="NetWork\NetworkService.cpp" />
     <ClCompile Include="NetWork\Session.cpp" />
     <ClCompile Include="NetWork\SessionService.cpp" />
     <ClCompile Include="NetWork\SessionServiceManager.cpp" />
