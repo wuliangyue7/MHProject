@@ -15,7 +15,7 @@ message(msg)
 MHUInt32 Session::SID = 0;
 std::string Session::createSid()
 {
-	BSLock lock(MU_SId);
+	MHBSLock(MU_SId);
 	return "sid"+(++SID);
 }
 

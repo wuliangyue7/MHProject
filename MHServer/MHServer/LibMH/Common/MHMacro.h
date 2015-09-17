@@ -39,7 +39,7 @@
 #define BFuncInt boost::function<void(int)>
 #define BIntFuncInt boost::function<int(int)>
 
-#define SgScopedLock(__x) boost::mutex::scoped_lock lock((__x))
+#define MHBSLock(__x) boost::mutex::scoped_lock lock((__x))
 
 #define MH_TRACE(__x) std::cout<<(__x)<<std::endl;
 #define MH_TRACE2(__x, __y) std::cout<<(__x)<<(__y)<<std::endl;

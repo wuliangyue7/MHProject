@@ -27,7 +27,7 @@ inline MHInt32 SessionService::getSessionCapacity()
 
 inline MHInt32 SessionService::getAliveSessionCount()
 {
-	SgScopedLock(_muSessionList);
+	MHBSLock(_muSessionList);
 	
 	return _sessionList.size();
 }
@@ -61,14 +61,14 @@ SessionService::ServiceStat SessionService::getServiceStat()
 
 bool SessionService::addSession(shared_ptr<Session> session)
 {
-	SgScopedLock(_muSessionList);
+	MHBSLock(_muSessionList);
 	_sessionList.push_back(session);
 	return true;
 }
 
 bool SessionService::removeSession(shared_ptr<Session> session)
 {
-	SgScopedLock(_muSessionList);
+	MHBSLock(_muSessionList);
 	std::list<shared_ptr<Session>>::iterator it;
 	_sessionList.remove(session);
 	return true;
@@ -77,7 +77,7 @@ bool SessionService::removeSession(shared_ptr<Session> session)
 void SessionService::onTick()
 {
 	//MH_TRACE2(getName(), getAliveSessionCount());
-	SgScopedLock(_muSessionList);
+	MHBSLock(_muSessionList);
 	std::list<shared_ptr<Session>>::iterator it;
 	for (it = _sessionList.begin(); it != _sessionList.end(); it++)
 	{
