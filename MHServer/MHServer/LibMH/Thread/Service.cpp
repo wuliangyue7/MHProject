@@ -26,6 +26,11 @@ void Service::onStart()
 {
 }
 
+void Service::onPreRunning()
+{
+
+}
+
 void Service::onRunning()
 {
 	if (_tickTime <= 0)
@@ -59,6 +64,10 @@ void Service::onRunning()
 			boost::this_thread::sleep(boost::posix_time::millisec(_tickTime - _tickCostTime));
 		}
 	}
+}
+
+void Service::onPreFinish()
+{
 }
 
 void Service::onFinish()

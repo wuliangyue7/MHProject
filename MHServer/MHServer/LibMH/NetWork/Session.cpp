@@ -12,6 +12,7 @@ NetMessage::NetMessage(MHUInt16 msgId, shared_ptr<google::protobuf::Message> msg
 message(msg)
 {}
 
+BMutex Session::MU_SId;
 MHUInt32 Session::SID = 0;
 std::string Session::createSid()
 {

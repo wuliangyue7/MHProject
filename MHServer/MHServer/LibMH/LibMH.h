@@ -4,5 +4,6 @@
 #define __LIBMH_H__
 
 #include "./Common/MHComInc.h"
+#include "Application/AppInfo.h"
 
 #endif // __LIBMH_H__

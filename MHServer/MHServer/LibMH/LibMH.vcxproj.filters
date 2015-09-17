@@ -72,6 +72,9 @@
     <ClInclude Include="DB\MHDataBase.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Application\Attribute.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NetWork\Session.cpp">
@@ -105,6 +108,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="NetWork\NetworkService.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Attribute.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

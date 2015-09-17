@@ -61,4 +61,21 @@
 #define MAP_INT_STR_IT std::map<int, std::string>::iterator
 #define MAP_INT_STR_VT std::map<int, std::string>::value_type
 
+#define MAP_STR_ANY_IT std::map<std::string, boost::any>::iterator
+#define MAP_STR_ANY_VT std::map<std::string, boost::any>::value_type
+
+#define DEF_MH_ATTRS public: \
+inline Attrbute& getAttr()	\
+{	\
+	return _attrs;	\
+}	\
+private:	\
+	Attrbute _attrs;	
+
+#define SET_ATTR_STRING(__attr, __key, __val) __attr.setAttr(__key, any(string(__val)))
+#define GET_ATTR_STRING(__attr, __key, __defaultVal) __attr.getAttr<std::string>(__key, __defaultVal)
+
+#define SET_ATTR_INT(__attr, __key, __val) __attr.setAttr(__key, __val)
+#define GET_ATTR_INT(__attr, __key, __defaultVal) __attr.getAttr<int>(__key, __defaultVal)
+
 #endif // __MHMACRO_h__

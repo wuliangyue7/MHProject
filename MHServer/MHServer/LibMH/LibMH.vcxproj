@@ -68,6 +68,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application\AppInfo.h" />
+    <ClInclude Include="Application\Attribute.h" />
     <ClInclude Include="Common\MHComInc.h" />
     <ClInclude Include="Config\MHConfigManager.h" />
     <ClInclude Include="DB\MHDataBase.h" />
@@ -89,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\AppInfo.cpp" />
+    <ClCompile Include="Application\Attribute.cpp" />
     <ClCompile Include="Config\MHConfigManager.cpp" />
     <ClCompile Include="NetWork\NetMessageCodec.cpp" />
     <ClCompile Include="NetWork\NetMessageFactory.cpp" />

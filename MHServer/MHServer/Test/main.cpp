@@ -10,8 +10,16 @@ US_NS_BOOST
 
 int main(int argc, char** argv)
 {
+	APP_INS->getAttr().setAttr("test", any(string("ccxasdsd")));
+	MH_TRACE(APP_INS->getAttr().getAttr<string>("test", "str"));
+
+	SET_ATTR_STRING(APP_INS->getAttr(), "123", "abcsdsec");
+	MH_TRACE(GET_ATTR_STRING(APP_INS->getAttr(), "123", "abc"));
+
+	SET_ATTR_INT(APP_INS->getAttr(), "123", 789);
+	MH_TRACE(GET_ATTR_INT(APP_INS->getAttr(), "123", 0));
 	//MHConfigTest();
-	MHTestNetWork();
+	//MHTestNetWork();
 	/*
 	boost::thread threadNetwork(boost::bind(&NetworkWorker::run, NetworkWorker::getInstance()));
 	boost::shared_ptr<boost::thread_group> threadGroup(new boost::thread_group());
