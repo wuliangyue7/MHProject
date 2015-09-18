@@ -62,16 +62,19 @@ SessionService::ServiceStat SessionService::getServiceStat()
 bool SessionService::addSession(shared_ptr<Session> session)
 {
 	MHBSLock(_muSessionList);
+	session->setSockCloseCallBack(std::bind1st(std::mem_fun(&SessionService::onSessionClose), this));
+	session->onInit();
 	_sessionList.push_back(session);
+	session->beginReadData();
+
 	return true;
 }
 
-bool SessionService::removeSession(shared_ptr<Session> session)
+void SessionService::onSessionClose(shared_ptr<Session> session)
 {
 	MHBSLock(_muSessionList);
-	std::list<shared_ptr<Session>>::iterator it;
+	session->onDestory();
 	_sessionList.remove(session);
-	return true;
 }
 
 void SessionService::onTick()

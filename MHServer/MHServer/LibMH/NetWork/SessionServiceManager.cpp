@@ -2,8 +2,9 @@
 
 NS_BEGIN_MH
 
-SessionServiceManager::SessionServiceManager(BSPtr<BPTree> config)
+SessionServiceManager::SessionServiceManager(BSPtr<BPTree> config, BSPtr<ISessionFactory> sessionFactory)
 :_sessionServList()
+, _sessionFactory(sessionFactory)
 {
 	if (config == NULL)
 	{
@@ -45,11 +46,12 @@ void SessionServiceManager::onClinetConnect(shared_ptr<BSocket> sock)
 	shared_ptr<SessionService> serv = getSessionService();
 	if (serv == NULL)
 	{
-		MH_TRACE("SessionServiceManager no more SessionService for new session");
+		MH_WARING("SessionServiceManager no more SessionService for new session");
 		sock->close();
 		return;
 	}
-	serv->addSession(shared_ptr<Session>(new Session(sock)));
+
+	serv->addSession(shared_ptr<Session>(_sessionFactory->createSession()));
 }
 
 shared_ptr<SessionService> SessionServiceManager::getSessionService()

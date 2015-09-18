@@ -27,9 +27,9 @@ BSPtr<MHConfigManager> AppInfo::getConfigMgr()
 	return _confMgr;
 }
 
-void AppInfo::createSessionServiceManager(BSPtr<BPTree> config)
+void AppInfo::createSessionServiceManager(BSPtr<BPTree> config, BSPtr<ISessionFactory> sessionFactory)
 {
-	_sessionServiceMgr.reset(new SessionServiceManager(config));
+	_sessionServiceMgr.reset(new SessionServiceManager(config, sessionFactory));
 }
 
 

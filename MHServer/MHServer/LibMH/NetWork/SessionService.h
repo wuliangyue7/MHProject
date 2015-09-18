@@ -37,7 +37,7 @@ public:
 	inline MHInt32 getAliveSessionCount();
 	ServiceStat getServiceStat();
 	bool addSession(shared_ptr<Session> session);
-	bool removeSession(shared_ptr<Session> session);
+	void onSessionClose(shared_ptr<Session> session);
 
 private:
 	MHInt16 _sessionCapacity;

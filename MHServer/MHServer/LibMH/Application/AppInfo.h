@@ -18,7 +18,7 @@ public:
 	void createConfigMgr();
 	BSPtr<MHConfigManager> getConfigMgr();
 
-	void AppInfo::createSessionServiceManager(BSPtr<BPTree> config);
+	void AppInfo::createSessionServiceManager(BSPtr<BPTree> config, BSPtr<ISessionFactory> sessionFactory);
 	BSPtr<SessionServiceManager> getSessionServiceMgr();
 
 	DEF_MH_ATTRS

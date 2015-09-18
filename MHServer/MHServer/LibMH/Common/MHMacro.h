@@ -65,12 +65,18 @@
 #define MAP_STR_ANY_VT std::map<std::string, boost::any>::value_type
 
 #define DEF_MH_ATTRS public: \
-inline Attrbute& getAttr()	\
-{	\
-	return _attrs;	\
-}	\
+	inline bool setAttr(const std::string& key, any value, bool forceUpdate = true) \
+	{\
+		return _attrs.setAttr(key, value);\
+	}\
+	\
+	template<typename T> T getAttr(const std::string& key, const T& defaultValue, bool withLock = false)	\
+	{	\
+		return _attrs.getAttr<T>(key, defaultValue, withLock);	\
+	}	\
+	\
 private:	\
-	Attrbute _attrs;	
+	Attrbute _attrs;
 
 #define SET_ATTR_STRING(__attr, __key, __val) __attr.setAttr(__key, any(string(__val)))
 #define GET_ATTR_STRING(__attr, __key, __defaultVal) __attr.getAttr<std::string>(__key, __defaultVal)

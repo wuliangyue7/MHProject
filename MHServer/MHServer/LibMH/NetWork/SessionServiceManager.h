@@ -12,6 +12,7 @@
 
 #include "../Common/MHMacro.h"
 #include "./SessionService.h"
+#include "./Session.h"
 
 #include <boost/asio.hpp>
 
@@ -25,7 +26,7 @@ NS_BEGIN_MH
 class SessionServiceManager
 {
 public:
-	SessionServiceManager(BSPtr<BPTree> config);
+	SessionServiceManager(BSPtr<BPTree> config, BSPtr<ISessionFactory> sessionFactory);
 	~SessionServiceManager();
 
 	void onClinetConnect(BSPtr<BSocket> socket);
@@ -39,6 +40,7 @@ private:
 
 protected:
 	std::vector<BSPtr<SessionService>> _sessionServList;
+	BSPtr<ISessionFactory> _sessionFactory;
 };
 
 NS_END_MH

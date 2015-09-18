@@ -10,14 +10,14 @@ US_NS_BOOST
 
 int main(int argc, char** argv)
 {
-	APP_INS->getAttr().setAttr("test", any(string("ccxasdsd")));
-	MH_TRACE(APP_INS->getAttr().getAttr<string>("test", "str"));
+	APP_INS->setAttr("test", any(string("ccxasdsd")));
+	MH_TRACE(APP_INS->getAttr<string>("test", "str"));
 
-	SET_ATTR_STRING(APP_INS->getAttr(), "123", "abcsdsec");
-	MH_TRACE(GET_ATTR_STRING(APP_INS->getAttr(), "123", "abc"));
+	APP_INS->setAttr("123", any(string("val_of_123")));
+	MH_TRACE(APP_INS->getAttr<string>("123", "abc"));
 
-	SET_ATTR_INT(APP_INS->getAttr(), "123", 789);
-	MH_TRACE(GET_ATTR_INT(APP_INS->getAttr(), "123", 0));
+	APP_INS->setAttr("123", 789);
+	MH_TRACE(APP_INS->getAttr<int>("123", 0));
 	//MHConfigTest();
 	//MHTestNetWork();
 	/*

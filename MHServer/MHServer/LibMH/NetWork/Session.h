@@ -14,8 +14,11 @@
 #include "../Utils/ByteUtils.hpp"
 #include "../Common/MHComInc.h"
 #include "NetMessageCodec.h"
+#include "../Application/Attribute.h"
 
 #include <boost/asio.hpp>
+#include <boost/enable_shared_from_this.hpp>
+#include <boost/type_traits.hpp>
 #include <google/protobuf/message.h>
 
 #define RecvDataCacheMaxLen 4*1024*8
@@ -35,23 +38,26 @@ public:
 	shared_ptr<google::protobuf::Message> message;
 };
 
-class Session
+class Session :public enable_shared_from_this<Session>
 {
 public:
 	Session(shared_ptr<BSocket> sock);
 	~Session();
 
-	void sendNetMessage(shared_ptr<NetMessage> message);
 	virtual void onInit();
+	void beginReadData();
+	virtual void onDestory();
+
+	void sendNetMessage(shared_ptr<NetMessage> message);
 	std::string getSid();
 	void onTick();
 	void close();
+	void setSockCloseCallBack(BFunc<void(BSPtr<Session>)> func);
 
 protected:
 	virtual bool processNetMessage(shared_ptr<NetMessage> netMsg);
 
 private:
-	void beginReadData();
 	void handleRead(const boost::system::error_code& error, size_t bytes_transferred);
 	void sendData();
 	void trySendData();
@@ -75,9 +81,30 @@ private:
 	boost::mutex _muSendMsg;
 	bool _isSending;
 
+	BFunc<void(BSPtr<Session>)> _funcOnSockClose;
+
 	static BMutex MU_SId;
 	static MHUInt32 SID;
 	static std::string createSid();
+
+	DEF_MH_ATTRS
+};
+
+class ISessionFactory
+{
+public:
+	virtual BSPtr<Session> createSession() = 0;
+};
+
+template<class T>
+class SessionFactory :public ISessionFactory
+{
+public:
+	virtual BSPtr<Session> createSession()
+	{
+		//BOOST_MPL_ASSERT_MSG((boost::is_base_of<Session, T>::value), "type must be ISessionFactory", T);
+		return BSPtr<T>(new T);
+	}
 };
 
 NS_END_MH

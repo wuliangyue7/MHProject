@@ -32,7 +32,6 @@ _sendedDataPos(0),
 _isSending(false)
 {
 	memset(_recvDataCache, 0x00, sizeof(_recvDataCache));
-	beginReadData();
 }
 
 Session::~Session()
@@ -50,6 +49,12 @@ std::string Session::getSid()
 
 void Session::onInit()
 {
+
+}
+
+void Session::onDestory()
+{
+
 }
 
 void Session::onTick()
@@ -60,19 +65,6 @@ void Session::onTick()
 	}
 
 	processAllRecvNetMessage();
-
-	//MH_TRACE("onTick sendNet Message");
-
-		/*shared_ptr<NetMessage> testMsg(new NetMessage());
-		testMsg->msgId = NetMsgId::CS_PbTest;
-
-		shared_ptr<PbTest> pbTest(new PbTest());
-		pbTest->set_id(2343);
-		pbTest->set_name("xxasd23");
-		testMsg->message = pbTest;
-
-	
-		sendNetMessage(testMsg);*/
 	sendData();
 }
 
@@ -221,21 +213,20 @@ bool Session::processNetMessage(shared_ptr<NetMessage> netMsg)
 	MH_TRACE2("Session processNetMessage:", netMsg->msgId);
 	netMsg->message->PrintDebugString();
 
-	//shared_ptr<NetMessage> testMsg(new NetMessage());
-	//testMsg->msgId = NetMsgId::CS_UseItem;
-	//shared_ptr<UseItem> pbTest(new UseItem());
-	//pbTest->set_itemindex(1);
-	//pbTest->set_pktid(11);
-	//pbTest->set_usecommond(2);
-	//testMsg->message = pbTest;
-	//sendNetMessage(testMsg);
-
 	return true;
 }
 
 void Session::onSockClose()
 {
+	if (!_funcOnSockClose.empty())
+	{
+		_funcOnSockClose(shared_from_this());
+	}
+}
 
+void Session::setSockCloseCallBack(BFunc<void(BSPtr<Session>)> func)
+{
+	_funcOnSockClose = func;
 }
 
 NS_END_MH
