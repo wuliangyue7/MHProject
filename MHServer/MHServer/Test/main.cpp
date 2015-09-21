@@ -18,6 +18,10 @@ int main(int argc, char** argv)
 
 	APP_INS->setAttr("123", 789);
 	MH_TRACE(APP_INS->getAttr<int>("123", 0));
+
+	MHLog log;
+	log.init();
+	log.log("test log");
 	//MHConfigTest();
 	//MHTestNetWork();
 	/*

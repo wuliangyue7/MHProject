@@ -92,6 +92,7 @@
     <ClCompile Include="Application\AppInfo.cpp" />
     <ClCompile Include="Application\Attribute.cpp" />
     <ClCompile Include="Config\MHConfigManager.cpp" />
+    <ClCompile Include="Log\MHLog.cpp" />
     <ClCompile Include="NetWork\NetMessageCodec.cpp" />
     <ClCompile Include="NetWork\NetMessageFactory.cpp" />
     <ClCompile Include="NetWork\NetworkService.cpp" />

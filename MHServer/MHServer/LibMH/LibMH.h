@@ -5,5 +5,6 @@
 
 #include "./Common/MHComInc.h"
 #include "Application/AppInfo.h"
+#include "Log/MHLog.h"
 
 #endif // __LIBMH_H__

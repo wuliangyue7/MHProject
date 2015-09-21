@@ -113,5 +113,8 @@
     <ClCompile Include="Application\Attribute.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Log\MHLog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

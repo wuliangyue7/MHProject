@@ -6,7 +6,6 @@
 #include "../Common/MHMacro.h"
 #include "Message.h"
 #include "Worker.h"
-#include "../Log/MHLog.h"
 
 #include <boost/property_tree/ptree.hpp>
 
