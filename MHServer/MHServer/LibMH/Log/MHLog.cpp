@@ -5,15 +5,27 @@ NS_BEGIN_MH
 void MHLog::init()
 {
 	_logCore = logging::core::get();
-	logging::register_simple_formatter_factory< boost::log::trivial::severity_level, char >("Severity");
-	logging::add_file_log(
-		keywords::file_name = "log/sign_%Y-%m-%d_%H-%M-%S.%N.log",
-		keywords::rotation_size = 10 * 1024 * 1024,
-		keywords::time_based_rotation = sinks::file::rotation_at_time_point(0, 0, 0),
-		keywords::format = "[%TimeStamp%] (%Severity%) : %Message%",
-		keywords::min_free_space = 3 * 1024 * 1024
+
+	typedef sinks::synchronous_sink<sinks::text_ostream_backend> TextSink;
+
+	BSPtr<TextSink> sink = boost::make_shared<TextSink>();
+	sink->locked_backend()->add_stream(boost::make_shared<std::ofstream>("log/sign.log"));
+	sink->set_formatter(
+		expr::format("[%1%]<%2%>(%3%):%4%")
+		% expr::format_date_time<boost::posix_time::ptime>("TimeStamp", "%Y-%M-%d %H:%M:%S") 
+		% logging::trivial::severity
+		% expr::attr<boost::log::attributes::current_thread_id::value_type>("ThreadID")
+		% expr::smessage
 		);
-	logging::core::get()->set_filter(logging::trivial::severity >= logging::trivial::debug);
+
+	BSPtr<std::ostream> consoleStream(&std::clog, boost::null_deleter());
+	sink->locked_backend()->add_stream(consoleStream);
+
+	_logCore->add_sink(sink);
+
+	logging::add_common_attributes();
+	BOOST_LOG_SCOPED_THREAD_TAG("ThreadID", boost::this_thread::get_id());
+	
 }
 
 void MHLog::log(std::string info)

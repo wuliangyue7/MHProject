@@ -52,6 +52,13 @@
 #define MH_ERROR(msg) MH_TRACE(msg)
 #define MH_FATAL(msg) MH_TRACE(msg)
 
+#define MH_MAKESTR(__x, __str) \
+{	\
+	std::stringstream __strStream;	\
+	__strStream __x;	\
+	__strStream >> __str;	\
+}
+
 #define MAP_STR_STR_IT std::map<std::string, std::string>::iterator
 #define MAP_STR_STR_VT std::map<std::string, std::string>::value_type
 
