@@ -75,6 +75,9 @@
     <ClInclude Include="Application\Attribute.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="NetWork\Connection.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NetWork\Session.cpp">
@@ -114,6 +117,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Log\MHLog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NetWork\Connection.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

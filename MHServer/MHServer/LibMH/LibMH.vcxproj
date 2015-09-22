@@ -75,6 +75,7 @@
     <ClInclude Include="LibMH.h" />
     <ClInclude Include="Common\MHMacro.h" />
     <ClInclude Include="Log\MHLog.h" />
+    <ClInclude Include="NetWork\Connection.h" />
     <ClInclude Include="NetWork\NetMessageCodec.h" />
     <ClInclude Include="NetWork\NetMessageFactory.h" />
     <ClInclude Include="NetWork\NetworkService.h" />
@@ -93,6 +94,7 @@
     <ClCompile Include="Application\Attribute.cpp" />
     <ClCompile Include="Config\MHConfigManager.cpp" />
     <ClCompile Include="Log\MHLog.cpp" />
+    <ClCompile Include="NetWork\Connection.cpp" />
     <ClCompile Include="NetWork\NetMessageCodec.cpp" />
     <ClCompile Include="NetWork\NetMessageFactory.cpp" />
     <ClCompile Include="NetWork\NetworkService.cpp" />

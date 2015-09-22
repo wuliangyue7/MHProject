@@ -15,6 +15,7 @@
 #include "../Common/MHComInc.h"
 #include "NetMessageCodec.h"
 #include "../Application/Attribute.h"
+#include "./Connection.h"
 
 #include <boost/asio.hpp>
 #include <boost/enable_shared_from_this.hpp>
@@ -29,59 +30,21 @@ US_NS_BOOST
 
 using namespace boost::asio;
 
-struct NetMessage
-{
-public:
-	NetMessage();
-	NetMessage(MHUInt16 msgId, shared_ptr<google::protobuf::Message> msg);
-	MHUInt16 msgId;
-	shared_ptr<google::protobuf::Message> message;
-};
-
 class Session :public enable_shared_from_this<Session>
 {
 public:
-	Session(shared_ptr<BSocket> sock);
+	Session();
 	~Session();
 
 	virtual void onInit();
-	void beginReadData();
 	virtual void onDestory();
 
-	void sendNetMessage(shared_ptr<NetMessage> message);
 	std::string getSid();
 	void onTick();
 	void close();
-	void setSockCloseCallBack(BFunc<void(BSPtr<Session>)> func);
-
-protected:
-	virtual bool processNetMessage(shared_ptr<NetMessage> netMsg);
-
-private:
-	void handleRead(const boost::system::error_code& error, size_t bytes_transferred);
-	void sendData();
-	void trySendData();
-	void handleWrite(const boost::system::error_code& error, size_t bytes_transferred);
-	void processAllRecvNetMessage();
-	void onSockClose();
 
 private:
 	std::string _sId;
-	shared_ptr<BSocket> _sock;
-	MHUInt8 _recvDataCache[RecvDataCacheMaxLen];
-	MHInt16 _recvDataCachePos;		//start 0 end _recvDataCachePos
-	std::queue<shared_ptr<NetMessage>> _recvMessageQueue;
-	boost::mutex _muRecvMsg;
-
-	MHUInt8 _sendDataCache[SendDataCacheMaxLen];
-	MHInt16 _sendDataCachePos;		//start 0 end _sendDataCachePos valid data pos
-	MHInt16 _totalSendDataPos;		//current send data pos
-	MHInt16 _sendedDataPos;			//current sended data pos
-	std::queue<shared_ptr<NetMessage>> _sendMessageQueue;
-	boost::mutex _muSendMsg;
-	bool _isSending;
-
-	BFunc<void(BSPtr<Session>)> _funcOnSockClose;
 
 	static BMutex MU_SId;
 	static MHUInt32 SID;

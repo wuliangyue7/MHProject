@@ -16,7 +16,6 @@ class NetworkService:public Service
 public:
 	NetworkService(BSPtr<BIOServ> ioservice, BSPtr<BPTree> config, BFunc<void(BSPtr<BSocket>)> sockHandle);
 	virtual ~NetworkService();
-	static NetworkService* getInstance();
 
 	virtual void onStart();
 	virtual void onRunning();
